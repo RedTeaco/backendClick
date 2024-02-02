@@ -1,8 +1,8 @@
-import time
-from ctypes import windll, byref, c_char_p
+from ctypes import windll, byref
 from ctypes.wintypes import HWND, POINT
 
-import win32api, win32con, win32gui
+import win32api
+import win32con
 
 MOUSE_LEFT = "鼠标左键"
 MOUSE_MID = "鼠标中键"
