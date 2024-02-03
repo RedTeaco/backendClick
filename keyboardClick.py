@@ -1,4 +1,3 @@
-
 from ctypes import windll
 from ctypes.wintypes import HWND
 import string
@@ -122,6 +121,11 @@ def key_up(handle: HWND, key: str):
     wparam = vk_code
     lparam = (scan_code << 16) | 0XC0000001
     PostMessageW(handle, WM_KEYUP, wparam, lparam)
+
+
+def key_click(handle: HWND, key: str):
+    key_down(handle, key)
+    key_up(handle, key)
 
 
 if __name__ == "__main__":

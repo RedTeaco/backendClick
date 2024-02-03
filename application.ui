@@ -1,356 +1,484 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+ <author>RedTea</author>
  <class>Form</class>
  <widget class="QWidget" name="Form">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>486</width>
-    <height>396</height>
+    <width>480</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>后台按键</string>
   </property>
-  <widget class="QWidget" name="verticalLayoutWidget_4">
+  <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>30</x>
-     <y>10</y>
-     <width>181</width>
-     <height>371</height>
+     <x>20</x>
+     <y>27</y>
+     <width>451</width>
+     <height>351</height>
     </rect>
    </property>
-   <layout class="QVBoxLayout" name="verticalLayout_4">
-    <property name="sizeConstraint">
-     <enum>QLayout::SetDefaultConstraint</enum>
-    </property>
+   <layout class="QVBoxLayout" name="verticalLayout_7">
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout">
+     <layout class="QHBoxLayout" name="horizontalLayout_12">
       <property name="sizeConstraint">
        <enum>QLayout::SetFixedSize</enum>
       </property>
       <item>
-       <widget class="QRadioButton" name="left">
-        <property name="text">
-         <string>左键</string>
+       <spacer name="horizontalSpacer">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-        <property name="checked">
-         <bool>true</bool>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>1</height>
+         </size>
         </property>
-        <attribute name="buttonGroup">
-         <string notr="true">mouseGroup</string>
-        </attribute>
-       </widget>
+       </spacer>
       </item>
       <item>
-       <widget class="QRadioButton" name="mid">
-        <property name="text">
-         <string>中键</string>
+       <layout class="QVBoxLayout" name="verticalLayout_8">
+        <property name="spacing">
+         <number>0</number>
         </property>
-        <attribute name="buttonGroup">
-         <string notr="true">mouseGroup</string>
-        </attribute>
-       </widget>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="right">
-        <property name="text">
-         <string>右键</string>
-        </property>
-        <attribute name="buttonGroup">
-         <string notr="true">mouseGroup</string>
-        </attribute>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2">
         <property name="sizeConstraint">
          <enum>QLayout::SetFixedSize</enum>
         </property>
         <item>
-         <widget class="QRadioButton" name="click">
-          <property name="text">
-           <string>连点</string>
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetFixedSize</enum>
           </property>
-          <attribute name="buttonGroup">
-           <string notr="true">click_form</string>
-          </attribute>
-         </widget>
+          <item>
+           <widget class="QLabel" name="catch_window_label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>窗口捕获</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QKeySequenceEdit" name="catch_window_hotkey">
+            <property name="focusPolicy">
+             <enum>Qt::ClickFocus</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QDoubleSpinBox" name="break_time">
-          <property name="toolTip">
-           <string>间隔时间</string>
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetFixedSize</enum>
           </property>
-          <property name="wrapping">
-           <bool>false</bool>
-          </property>
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::NoButtons</enum>
-          </property>
-          <property name="prefix">
-           <string/>
-          </property>
-          <property name="suffix">
-           <string>秒</string>
-          </property>
-          <property name="minimum">
-           <double>0.010000000000000</double>
-          </property>
-         </widget>
+          <item>
+           <widget class="QLabel" name="window_name_label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string>窗口名：</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="window_name">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="scaledContents">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
       <item>
-       <widget class="QRadioButton" name="press">
-        <property name="text">
-         <string>长按</string>
+       <spacer name="horizontalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
         </property>
-        <property name="checked">
-         <bool>true</bool>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>1</height>
+         </size>
         </property>
-        <attribute name="buttonGroup">
-         <string notr="true">click_form</string>
-        </attribute>
-       </widget>
+       </spacer>
       </item>
      </layout>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
+     <layout class="QHBoxLayout" name="horizontalLayout_9">
+      <property name="sizeConstraint">
+       <enum>QLayout::SetMaximumSize</enum>
+      </property>
       <item>
-       <widget class="QLabel" name="mouse_hotkey_label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
+       <layout class="QVBoxLayout" name="verticalLayout_4">
+        <property name="spacing">
+         <number>20</number>
         </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
+        <property name="sizeConstraint">
+         <enum>QLayout::SetDefaultConstraint</enum>
         </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
+        <property name="leftMargin">
+         <number>10</number>
         </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
+        <property name="topMargin">
+         <number>10</number>
         </property>
-        <property name="text">
-         <string>鼠标操作快捷键</string>
+        <property name="rightMargin">
+         <number>10</number>
         </property>
-        <property name="textFormat">
-         <enum>Qt::AutoText</enum>
+        <property name="bottomMargin">
+         <number>10</number>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_3">
         <item>
-         <widget class="QLabel" name="mouse_start_label">
-          <property name="text">
-           <string>开始:</string>
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <property name="sizeConstraint">
+           <enum>QLayout::SetFixedSize</enum>
           </property>
-         </widget>
+          <item>
+           <widget class="QRadioButton" name="left">
+            <property name="text">
+             <string>左键</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">mouseGroup</string>
+            </attribute>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="mid">
+            <property name="text">
+             <string>中键</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">mouseGroup</string>
+            </attribute>
+           </widget>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="right">
+            <property name="text">
+             <string>右键</string>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">mouseGroup</string>
+            </attribute>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QKeySequenceEdit" name="mouse_start_hotkey">
-          <property name="keySequence">
-           <string>Shift+F8</string>
+         <layout class="QVBoxLayout" name="verticalLayout">
+          <property name="leftMargin">
+           <number>0</number>
           </property>
-         </widget>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <property name="sizeConstraint">
+             <enum>QLayout::SetFixedSize</enum>
+            </property>
+            <item>
+             <widget class="QRadioButton" name="click">
+              <property name="text">
+               <string>连点</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">click_form</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="break_time">
+              <property name="toolTip">
+               <string>间隔时间</string>
+              </property>
+              <property name="wrapping">
+               <bool>false</bool>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="prefix">
+               <string/>
+              </property>
+              <property name="suffix">
+               <string>秒</string>
+              </property>
+              <property name="minimum">
+               <double>0.010000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="press">
+            <property name="text">
+             <string>长按</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">click_form</string>
+            </attribute>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_2">
+          <item>
+           <widget class="QLabel" name="mouse_hotkey_label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="text">
+             <string>鼠标操作快捷键</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::AutoText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_3">
+            <item>
+             <widget class="QLabel" name="mouse_start_label">
+              <property name="text">
+               <string>开始:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QKeySequenceEdit" name="mouse_start_hotkey"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_5">
+            <item>
+             <widget class="QLabel" name="mouse_end_label">
+              <property name="text">
+               <string>结束:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QKeySequenceEdit" name="mouse_end_hotkey"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_5">
+       <widget class="Line" name="line">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <layout class="QVBoxLayout" name="verticalLayout_5">
+        <property name="spacing">
+         <number>20</number>
+        </property>
+        <property name="leftMargin">
+         <number>10</number>
+        </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
+        <property name="rightMargin">
+         <number>10</number>
+        </property>
+        <property name="bottomMargin">
+         <number>10</number>
+        </property>
         <item>
-         <widget class="QLabel" name="mouse_end_label">
-          <property name="text">
-           <string>结束:</string>
-          </property>
-         </widget>
+         <layout class="QVBoxLayout" name="verticalLayout_3">
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_4">
+            <item>
+             <widget class="QRadioButton" name="keyboard_click">
+              <property name="text">
+               <string>连按</string>
+              </property>
+              <attribute name="buttonGroup">
+               <string notr="true">keyboardGroup</string>
+              </attribute>
+             </widget>
+            </item>
+            <item>
+             <widget class="QDoubleSpinBox" name="keyboard_break_time">
+              <property name="toolTip">
+               <string>间隔时间</string>
+              </property>
+              <property name="wrapping">
+               <bool>false</bool>
+              </property>
+              <property name="buttonSymbols">
+               <enum>QAbstractSpinBox::NoButtons</enum>
+              </property>
+              <property name="prefix">
+               <string/>
+              </property>
+              <property name="suffix">
+               <string>秒</string>
+              </property>
+              <property name="minimum">
+               <double>0.010000000000000</double>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <widget class="QRadioButton" name="keyboard_press">
+            <property name="text">
+             <string>长按</string>
+            </property>
+            <property name="checked">
+             <bool>true</bool>
+            </property>
+            <attribute name="buttonGroup">
+             <string notr="true">keyboardGroup</string>
+            </attribute>
+           </widget>
+          </item>
+         </layout>
         </item>
         <item>
-         <widget class="QKeySequenceEdit" name="mouse_end_hotkey">
-          <property name="keySequence">
-           <string>Shift+F7</string>
-          </property>
-         </widget>
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLabel" name="key_label">
+            <property name="text">
+             <string>按键:</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QKeySequenceEdit" name="keyboard_key"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QLabel" name="keyboard_hotkey_label">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::LeftToRight</enum>
+            </property>
+            <property name="autoFillBackground">
+             <bool>false</bool>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::StyledPanel</enum>
+            </property>
+            <property name="text">
+             <string>键盘操作快捷键</string>
+            </property>
+            <property name="textFormat">
+             <enum>Qt::AutoText</enum>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_7">
+            <item>
+             <widget class="QLabel" name="keyboard_start_label">
+              <property name="text">
+               <string>开始:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QKeySequenceEdit" name="keyboard_start_hotkey"/>
+            </item>
+           </layout>
+          </item>
+          <item>
+           <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <widget class="QLabel" name="keyboard_end_label">
+              <property name="text">
+               <string>结束:</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QKeySequenceEdit" name="keyboard_end_hotkey"/>
+            </item>
+           </layout>
+          </item>
+         </layout>
         </item>
        </layout>
       </item>
      </layout>
     </item>
    </layout>
-  </widget>
-  <widget class="QWidget" name="verticalLayoutWidget_5">
-   <property name="geometry">
-    <rect>
-     <x>270</x>
-     <y>10</y>
-     <width>181</width>
-     <height>371</height>
-    </rect>
-   </property>
-   <layout class="QVBoxLayout" name="verticalLayout_5">
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_4">
-        <item>
-         <widget class="QRadioButton" name="keyboard_click">
-          <property name="text">
-           <string>连按</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QDoubleSpinBox" name="keyboard_break_time">
-          <property name="toolTip">
-           <string>间隔时间</string>
-          </property>
-          <property name="wrapping">
-           <bool>false</bool>
-          </property>
-          <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::NoButtons</enum>
-          </property>
-          <property name="prefix">
-           <string/>
-          </property>
-          <property name="suffix">
-           <string>秒</string>
-          </property>
-          <property name="minimum">
-           <double>0.010000000000000</double>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <widget class="QRadioButton" name="keyboard_press">
-        <property name="text">
-         <string>长按</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_6">
-      <item>
-       <widget class="QLabel" name="key_label">
-        <property name="text">
-         <string>按键:</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QKeySequenceEdit" name="keyboard_key"/>
-      </item>
-     </layout>
-    </item>
-    <item>
-     <layout class="QVBoxLayout" name="verticalLayout_6">
-      <item>
-       <widget class="QLabel" name="keyboard_hotkey_label">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::LeftToRight</enum>
-        </property>
-        <property name="autoFillBackground">
-         <bool>false</bool>
-        </property>
-        <property name="frameShape">
-         <enum>QFrame::StyledPanel</enum>
-        </property>
-        <property name="text">
-         <string>键盘操作快捷键</string>
-        </property>
-        <property name="textFormat">
-         <enum>Qt::AutoText</enum>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_7">
-        <item>
-         <widget class="QLabel" name="keyboard_start_label">
-          <property name="text">
-           <string>开始:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QKeySequenceEdit" name="keyboard_start_hotkey">
-          <property name="keySequence">
-           <string>F8</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8">
-        <item>
-         <widget class="QLabel" name="keyboard_end_label">
-          <property name="text">
-           <string>结束:</string>
-          </property>
-         </widget>
-        </item>
-        <item>
-         <widget class="QKeySequenceEdit" name="keyboard_end_hotkey">
-          <property name="keySequence">
-           <string>F7</string>
-          </property>
-         </widget>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </item>
-   </layout>
-  </widget>
-  <widget class="Line" name="line">
-   <property name="geometry">
-    <rect>
-     <x>230</x>
-     <y>-10</y>
-     <width>20</width>
-     <height>431</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Vertical</enum>
-   </property>
   </widget>
  </widget>
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="mouseGroup"/>
   <buttongroup name="click_form"/>
+  <buttongroup name="mouseGroup"/>
+  <buttongroup name="keyboardGroup"/>
  </buttongroups>
 </ui>
