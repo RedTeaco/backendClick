@@ -22,6 +22,9 @@ class Application:
         self.handle = None
         self.mouse_flag = True
         self.keyboard_flag = True
+        self.mouse_pos = ()
+        self.mouse_lock = False
+        self.keyboard_lock = False
         if not os.path.exists('config.ini'):
             self.app_data.setValue('Common/capture_hotkey', 'k')
             self.app_data.beginGroup('Mouse')
@@ -202,8 +205,12 @@ class Application:
         鼠标操作开始函数
         :return:
         """
+        if self.mouse_lock:
+            return
+        self.mouse_lock = True
+        self.mouse_pos = win32gui.GetCursorPos()
         if self.ui.press.isChecked():
-            mouseClick.mouse_down(self.handle, 960, 540, self.mouse_key[self.ui.mouseGroup.checkedId()])
+            mouseClick.mouse_down(self.handle, self.mouse_pos[0], self.mouse_pos[1], self.mouse_key[self.ui.mouseGroup.checkedId()])
         else:
             self.mouse_flag = True
             th = threading.Thread(target=self.mouse_click, name="mouse_click")
@@ -211,7 +218,7 @@ class Application:
 
     def mouse_click(self):
         while self.mouse_flag:
-            mouseClick.mouse_click(self.handle, 960, 540, self.mouse_key[self.ui.mouseGroup.checkedId()])
+            mouseClick.mouse_click(self.handle, self.mouse_pos[0], self.mouse_pos[1], self.mouse_key[self.ui.mouseGroup.checkedId()])
             time.sleep(self.ui.break_time.value())
 
     def mouse_stop(self):
@@ -219,8 +226,9 @@ class Application:
         鼠标操作停止函数
         :return:
         """
+        self.mouse_lock = False
         if self.ui.press.isChecked():
-            mouseClick.mouse_up(self.handle, 960, 540, self.mouse_key[self.ui.mouseGroup.checkedId()])
+            mouseClick.mouse_up(self.handle, self.mouse_pos[0], self.mouse_pos[1], self.mouse_key[self.ui.mouseGroup.checkedId()])
         else:
             self.mouse_flag = False
 
@@ -262,6 +270,9 @@ class Application:
         self.app_data.sync()
 
     def keyboard_start(self):
+        if self.keyboard_lock:
+            return
+        self.keyboard_lock = True
         if self.ui.keyboard_press.isChecked():
             # 获取快捷键框中的按键并转换为小写字符串
             keyboardClick.key_down(self.handle, QKeySequence.listToString(self.ui.keyboard_key.keySequence()).lower())
@@ -275,6 +286,7 @@ class Application:
             time.sleep(self.ui.keyboard_break_time.value())
 
     def keyboard_stop(self):
+        self.keyboard_lock = False
         if self.ui.keyboard_press.isChecked():
             keyboardClick.key_up(self.handle, QKeySequence.listToString(self.ui.keyboard_key.keySequence()).lower())
         else:
