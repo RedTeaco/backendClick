@@ -225,6 +225,7 @@ class Application:
         鼠标操作停止函数
         :return:
         """
+        self.mouse_lock = False
         if self.ui.press.isChecked():
             mouseClick.mouse_up(self.handle, self.mouse_pos[0], self.mouse_pos[1], self.mouse_key[self.ui.mouseGroup.checkedId()])
         else:
@@ -275,6 +276,7 @@ class Application:
             # 获取快捷键框中的按键并转换为小写字符串
             keyboardClick.key_down(self.handle, QKeySequence.listToString(self.ui.keyboard_key.keySequence()).lower())
         else:
+            self.keyboard_flag = True
             th = threading.Thread(target=self.keyboard_click, name="keyboard_start")
             th.start()
 
