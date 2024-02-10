@@ -1,3 +1,12 @@
+项目介绍
+=
+在捕获窗口后，便可以将该窗口放置于后台（但不要最小化），此时配置好的鼠标/键盘事件可以发送给在后台的窗口。  
+开发原因：用于Minecraft/PalWorld或其他游戏的单一重复动作，但注意，**请不要将本项目用于网游作弊**。  
+**软件GUI截图：**  
+  
+![GUI](https://github.com/EdenLeaf/backendClick/assets/88274143/c838e9b8-65a3-41e4-a6cd-4f1a492b7296)  
+  
+  
 **原理：** 利用PostMessageW函数向目标窗口发送指定的键盘/鼠标事件信息
 
 源代码中,package/Appdata中的代码为打包时所用的代码，如需直接用python源文件打开应用，则只需使用最外层的application.py
