@@ -4,8 +4,8 @@
 开发原因：用于Minecraft/PalWorld或其他游戏的单一重复动作，但注意，**请不要将本项目用于网游作弊**。  
 **软件GUI截图：**  
   
-![GUI](https://github.com/EdenLeaf/backendClick/assets/88274143/c838e9b8-65a3-41e4-a6cd-4f1a492b7296)  
-  
+  ![GUI](https://github.com/EdenLeaf/backendClick/assets/88274143/8df143c0-0903-4e31-898b-4732be4c1ba1)
+
   
 **原理：** 利用PostMessageW函数向目标窗口发送指定的键盘/鼠标事件信息
 
