@@ -6,7 +6,7 @@ import keyboard
 import win32gui
 from PySide6.QtCore import QSettings
 from PySide6.QtGui import QKeySequence
-from PySide6.QtWidgets import QApplication, QWidget
+from PySide6.QtWidgets import QApplication, QWidget, QInputDialog
 
 import keyboardClick
 import mouseClick
@@ -44,14 +44,14 @@ class Application:
 
     def main(self):
         app = QApplication(sys.argv)
-        window = QWidget()
-        window.resize(480, 400)
-        window.setFixedSize(480, 400)  # 限制窗口大小
-        self.ui.setupUi(window)
+        self.window = QWidget()
+        self.window.resize(480, 400)
+        self.window.setFixedSize(480, 400)  # 限制窗口大小
+        self.ui.setupUi(self.window)
         self.set_button_id()
         self.read_config()
         self.app_listener()
-        window.show()
+        self.window.show()
         sys.exit(app.exec())
 
     def read_config(self):
@@ -128,6 +128,7 @@ class Application:
         self.ui.keyboard_press.clicked[bool].connect(self.ui.keyboard_break_time.setDisabled)  # 改动键盘使用方式为长按槽函数连接
         self.ui.keyboard_press.clicked.connect(self.set_keyboard_click_type)
         self.ui.keyboard_break_time.editingFinished.connect(self.set_keyboard_break_time)  # 改动键盘连点间隔时间槽函数连接
+        self.ui.specButton.clicked.connect(self.set_sys_key)  # 特殊快捷键选择
 
     # -----------------------窗口句柄捕获函数-start--------------------------#
     def handle_capture(self):
@@ -234,6 +235,18 @@ class Application:
     # -----------------------鼠标操作函数-end--------------------------#
 
     # -----------------------键盘操作函数-start--------------------------#
+    def set_sys_key(self):
+        """
+        sign: specButton_clicked
+        设置Shift/Ctrl等无法单独设置的快捷键
+        :return:
+        """
+        keys = ('shift', 'ctrl', 'alt')
+        key, ok = QInputDialog.getItem(self.window, "select specific key", '特殊按键列表', keys, 0, False)
+        if ok and key:
+            self.ui.keyboard_key.setKeySequence(str(key))
+            self.set_keyboard_key()
+
     def set_keyboard_start_hotkey(self):
         keyboard_click_hotkey = QKeySequence.listToString(self.ui.keyboard_start_hotkey.keySequence()).lower()
         keyboard.remove_hotkey(self.app_data.value("Keyboard/start_hotkey"))

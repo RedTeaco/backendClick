@@ -405,6 +405,13 @@
           <item>
            <widget class="QKeySequenceEdit" name="keyboard_key"/>
           </item>
+          <item>
+           <widget class="QPushButton" name="specButton">
+            <property name="text">
+             <string>特殊按键选择</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -477,8 +484,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="click_form"/>
-  <buttongroup name="mouseGroup"/>
   <buttongroup name="keyboardGroup"/>
+  <buttongroup name="mouseGroup"/>
+  <buttongroup name="click_form"/>
  </buttongroups>
 </ui>

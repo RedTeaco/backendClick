@@ -17,8 +17,8 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QAbstractSpinBox, QApplication, QButtonGroup, QDoubleSpinBox,
     QFrame, QHBoxLayout, QKeySequenceEdit, QLabel,
-    QLayout, QRadioButton, QSizePolicy, QSpacerItem,
-    QVBoxLayout, QWidget)
+    QLayout, QPushButton, QRadioButton, QSizePolicy,
+    QSpacerItem, QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -274,6 +274,11 @@ class Ui_Form(object):
 
         self.horizontalLayout_6.addWidget(self.keyboard_key)
 
+        self.specButton = QPushButton(self.verticalLayoutWidget)
+        self.specButton.setObjectName(u"specButton")
+
+        self.horizontalLayout_6.addWidget(self.specButton)
+
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_6)
 
@@ -362,6 +367,7 @@ class Ui_Form(object):
         self.keyboard_break_time.setSuffix(QCoreApplication.translate("Form", u"\u79d2", None))
         self.keyboard_press.setText(QCoreApplication.translate("Form", u"\u957f\u6309", None))
         self.key_label.setText(QCoreApplication.translate("Form", u"\u6309\u952e:", None))
+        self.specButton.setText(QCoreApplication.translate("Form", u"\u7279\u6b8a\u6309\u952e\u9009\u62e9", None))
         self.keyboard_hotkey_label.setText(QCoreApplication.translate("Form", u"\u952e\u76d8\u64cd\u4f5c\u5feb\u6377\u952e", None))
         self.keyboard_start_label.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb:", None))
         self.keyboard_end_label.setText(QCoreApplication.translate("Form", u"\u7ed3\u675f:", None))
