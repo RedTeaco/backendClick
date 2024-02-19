@@ -15,18 +15,18 @@ from application_ui import Ui_Form
 
 
 class Application:
-    def __init__(self):
+    def __init__(self, config_file_path: str = 'config.ini'):
         self.window = None
         self.mouse_key = [mouseClick.MOUSE_LEFT, mouseClick.MOUSE_MID, mouseClick.MOUSE_RIGHT]
         self.ui = Ui_Form()
-        self.app_data = QSettings('config.ini', QSettings.IniFormat)
+        self.app_data = QSettings(config_file_path, QSettings.IniFormat)
         self.handle = None
         self.mouse_flag = True
         self.keyboard_flag = True
         self.mouse_pos = ()
         self.mouse_lock = False
         self.keyboard_lock = False
-        if not os.path.exists('config.ini'):
+        if not os.path.exists(config_file_path):
             self.app_data.setValue('Common/capture_hotkey', 'k')
             self.app_data.beginGroup('Mouse')
             self.app_data.setValue('mouse_key', mouseClick.MOUSE_LEFT)

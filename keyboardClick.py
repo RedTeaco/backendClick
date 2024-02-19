@@ -126,22 +126,3 @@ def key_up(handle: HWND, key: str):
 def key_click(handle: HWND, key: str):
     key_down(handle, key)
     key_up(handle, key)
-
-
-if __name__ == "__main__":
-    # 需要和目标窗口同一权限，游戏窗口通常是管理员权限
-    import sys
-
-    if not windll.shell32.IsUserAnAdmin():
-        # 不是管理员就提权
-        windll.shell32.ShellExecuteW(
-            None, "runas", sys.executable, __file__, None, 1)
-    print("按下K开始捕获窗口句柄")
-    keyboard.wait('k')
-    pos = win32gui.GetCursorPos()
-    handle = win32gui.WindowFromPoint(pos)
-    print("捕获窗口句柄完成,窗口名:%s" % win32gui.GetWindowText(handle))
-    keyboard.add_hotkey('f8', key_down, args=(handle, 'f'))
-    keyboard.add_hotkey('f7', key_up, args=(handle, 'f'))  # f7暂停
-    keyboard.wait('f9')
-    key_up(handle, 'f')

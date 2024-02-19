@@ -49,5 +49,5 @@ if __name__ == '__main__':
 
     #  进入程序正式入口
     import application
-
-    application.main()
+    app = application.Application('../config.ini')
+    app.main()
