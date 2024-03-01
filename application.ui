@@ -372,7 +372,7 @@
                <string>秒</string>
               </property>
               <property name="minimum">
-               <double>0.010000000000000</double>
+               <double>0.100000000000000</double>
               </property>
              </widget>
             </item>
@@ -484,8 +484,8 @@
  <resources/>
  <connections/>
  <buttongroups>
-  <buttongroup name="keyboardGroup"/>
   <buttongroup name="mouseGroup"/>
   <buttongroup name="click_form"/>
+  <buttongroup name="keyboardGroup"/>
  </buttongroups>
 </ui>

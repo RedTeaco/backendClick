@@ -245,7 +245,7 @@ class Ui_Form(object):
         self.keyboard_break_time.setObjectName(u"keyboard_break_time")
         self.keyboard_break_time.setWrapping(False)
         self.keyboard_break_time.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.keyboard_break_time.setMinimum(0.010000000000000)
+        self.keyboard_break_time.setMinimum(0.100000000000000)
 
         self.horizontalLayout_4.addWidget(self.keyboard_break_time)
 

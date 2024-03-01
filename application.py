@@ -54,7 +54,7 @@ class Application:
         self.read_config()
         self.app_listener()
         self.window.show()
-        exit(app.exec())
+        sys.exit(app.exec())
 
     def read_config(self):
         """
@@ -299,9 +299,12 @@ class Application:
             th.start()
 
     def keyboard_click(self):
+        break_time = self.ui.keyboard_break_time.value() - 0.05
         while self.keyboard_flag:
             keyboardClick.key_down(self.handle, QKeySequence.listToString(self.ui.keyboard_key.keySequence()).lower())
-            time.sleep(self.ui.keyboard_break_time.value())
+            time.sleep(0.05)
+            keyboardClick.key_up(self.handle, QKeySequence.listToString(self.ui.keyboard_key.keySequence()).lower())
+            time.sleep(break_time)
 
     def keyboard_stop(self):
         self.keyboard_lock = False
