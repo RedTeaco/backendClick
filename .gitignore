@@ -1,2 +1,6 @@
 .idea
 .gitignore
+/Test/
+/1.x/
+/package/
+config.ini
