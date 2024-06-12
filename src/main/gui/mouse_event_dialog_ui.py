@@ -15,6 +15,7 @@ from PySide6.QtWidgets import (QAbstractSpinBox, QComboBox,
                                QLabel, QRadioButton, QVBoxLayout,
                                QWidget)
 
+
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
@@ -25,7 +26,7 @@ class Ui_Dialog(object):
         self.buttonBox = QDialogButtonBox(Dialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setGeometry(QRect(40, 150, 211, 23))
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
         self.buttonBox.setCenterButtons(True)
         self.verticalLayoutWidget = QWidget(Dialog)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
@@ -50,7 +51,6 @@ class Ui_Dialog(object):
         self.mouse_btn_box.setMaxCount(3)
 
         self.horizontalLayout_2.addWidget(self.mouse_btn_box)
-
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
@@ -79,20 +79,17 @@ class Ui_Dialog(object):
 
         self.horizontalLayout_4.addWidget(self.break_time_box)
 
-
         self.horizontalLayout_3.addLayout(self.horizontalLayout_4)
 
-
         self.verticalLayout.addLayout(self.horizontalLayout_3)
-
 
         self.retranslateUi(Dialog)
         self.is_click_btn.toggled.connect(self.break_time_box.setEnabled)
 
         self.mouse_btn_box.setCurrentIndex(0)
 
-
         QMetaObject.connectSlotsByName(Dialog)
+
     # setupUi
 
     def retranslateUi(self, Dialog):
@@ -107,4 +104,3 @@ class Ui_Dialog(object):
         self.label_3.setText(QCoreApplication.translate("Dialog", u"\u95f4\u9694\u65f6\u95f4", None))
         self.break_time_box.setSuffix(QCoreApplication.translate("Dialog", u"\u79d2", None))
     # retranslateUi
-

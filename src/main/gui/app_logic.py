@@ -6,13 +6,13 @@ from typing import List
 
 import keyboard
 import win32gui
-from PySide6.QtCore import QSettings, Qt
+from PySide6.QtCore import QSettings, Qt, qDebug
 from PySide6.QtGui import QKeySequence
 from PySide6.QtWidgets import QApplication, QWidget, QListWidgetItem, QDialog
 
-from api import mouseClick
-from consumer.keyboardConsumer import KeyboardConsumer, KeyboardEvent
-from consumer.mouseConsumer import MouseConsumer, MouseEvent
+from api import mouse_api
+from consumer.keyboard_consumer import KeyboardConsumer, KeyboardEvent
+from consumer.mouse_consumer import MouseConsumer, MouseEvent
 from gui import mouse_event_dialog_ui, keyboard_event_dialog_ui
 from gui.application_ui import Ui_Form
 
@@ -79,7 +79,7 @@ class keyboard_event_data:
 class AppLogic:
     def __init__(self, config_file_path: str = 'config.ini'):
         self.window = None
-        self.mouse_button = [mouseClick.MOUSE_LEFT, mouseClick.MOUSE_MID, mouseClick.MOUSE_RIGHT]
+        self.mouse_button = [mouse_api.MOUSE_LEFT, mouse_api.MOUSE_MID, mouse_api.MOUSE_RIGHT]
         self.ui = Ui_Form()
         self.app_data = QSettings(config_file_path, QSettings.IniFormat)
         self.handle = None
@@ -167,12 +167,21 @@ class AppLogic:
         """
         self.ui.catch_window_hotkey.editingFinished.connect(self.set_handle_capture_hotkey)
         # 改动 捕获窗口句柄 热键 槽函数连接
+
+        self.ui.mouse_start_hotkey.editingFinished.connect(self.set_mouse_start_hotkey)
+        # 改动 鼠标事件开始 热键 槽函数连接
+        self.ui.mouse_stop_hotkey.editingFinished.connect(self.set_mouse_stop_hotkey)
+        # 改动 鼠标事件停止 热键 槽函数连接
         self.ui.add_mel_button.clicked.connect(self.mouse_event_dialog)
         # 添加鼠标事件按钮
         self.ui.remove_mel_button.clicked.connect(self.remove_mouse_event)
         # 删除鼠标事件按钮
         self.ui.clear_mel_button.clicked.connect(self.clear_mouse_event)
         # 清空鼠标事件列表按钮
+
+        self.ui.keyboard_start_hotkey.editingFinished.connect(self.set_keyboard_start_hotkey)
+        # 改动 键盘事件开始 热键 槽函数连接
+        self.ui.keyboard_stop_hotkey.editingFinished.connect(self.set_keyboard_stop_hotkey)
         self.ui.add_kel_btn.clicked.connect(self.keyboard_event_dialog)
         # 添加键盘事件按钮
         self.ui.remove_kel_btn.clicked.connect(self.remove_keyboard_event)
@@ -307,7 +316,7 @@ class AppLogic:
         self.mouse_workers = build_worker_pool(self.mouse_queue, len(mouse_events))
         for mouse_event_str in mouse_events:
             mouse_event = mouse_event_data.fromString(mouse_event_str)
-            # print(mouse_event)
+            qDebug(f"鼠标事件:{mouse_event}")
             self.mouse_queue.put(MouseEvent(mouse_event.button, mouse_event.is_click,
                                             self.handle, self.mouse_pos, mouse_event.break_time))
 
@@ -435,6 +444,7 @@ class AppLogic:
         self.keyboard_queue = Queue()
         self.keyboard_workers = build_worker_pool(self.keyboard_queue, len(keyboard_events))
         for keyboard_event_str in keyboard_events:
+            qDebug(f"键盘事件:{keyboard_event_str}")
             keyboard_event = keyboard_event_data.fromString(keyboard_event_str)
             self.keyboard_queue.put(KeyboardEvent(keyboard_event.key, keyboard_event.is_tap,
                                                   self.handle, keyboard_event.break_time))
