@@ -5,15 +5,16 @@ from queue import Queue
 from typing import List
 
 import keyboard
-import mouseClick
 import win32gui
 from PySide6.QtCore import QSettings, Qt
 from PySide6.QtGui import QKeySequence
 from PySide6.QtWidgets import QApplication, QWidget, QListWidgetItem, QDialog
 
-from main.consumer.mouseConsumer import MouseConsumer, MouseEvent
-from main.gui import mouse_event_dialog_ui
-from main.gui.application_ui import Ui_Form
+from api import mouseClick
+from consumer.keyboardConsumer import KeyboardConsumer, KeyboardEvent
+from consumer.mouseConsumer import MouseConsumer, MouseEvent
+from gui import mouse_event_dialog_ui, keyboard_event_dialog_ui
+from gui.application_ui import Ui_Form
 
 
 @dataclass
@@ -37,12 +38,41 @@ class mouse_event_data:
             return mouse_event_data(
                 button=split_string_list[1][:4],
                 is_click=True,
-                break_time=split_string_list[3][:-1],
+                break_time=split_string_list[3][:-1]
             )
         else:
             return mouse_event_data(
                 button=split_string_list[1][:4],
-                is_click=False,
+                is_click=False
+            )
+
+
+@dataclass
+class keyboard_event_data:
+    key: str
+    is_tap: bool
+    break_time: float = 0.01
+
+    def toString(self):
+        if self.is_tap:
+            return f"按键:{self.key}\t连按:是\t间隔时间:{self.break_time}秒"
+        else:
+            return f"按键:{self.key}\t连点:否"
+
+    @staticmethod
+    def fromString(string: str):
+        split_string_list: list = string.strip().split(":", 3)
+        print(split_string_list)
+        if split_string_list[2][0] == "是":
+            return keyboard_event_data(
+                key=split_string_list[1][:-3],
+                is_tap=True,
+                break_time=split_string_list[3][:-1]
+            )
+        else:
+            return keyboard_event_data(
+                key=split_string_list[1][:-3],
+                is_tap=False
             )
 
 
@@ -54,14 +84,16 @@ class AppLogic:
         self.app_data = QSettings(config_file_path, QSettings.IniFormat)
         self.handle = None
 
-        self.mouse_workers:List[MouseConsumer] = []
+        self.mouse_workers: List[MouseConsumer] = []
         self.mouse_lock = False
         self.mouse_pos = ()
         self.mouse_list = []
         self.mouse_queue = Queue()
 
+        self.keyboard_workers: List[KeyboardConsumer] = []
         self.keyboard_lock = False
         self.keyboard_list = []
+        self.keyboard_queue = Queue()
 
         # init config file
         if not os.path.exists(config_file_path):
@@ -99,12 +131,23 @@ class AppLogic:
 
         if app_data.value('Mouse/mouse_list'):
             # 当配置文件中只存入了一个元素(event)时，value()返回值为str,当存入了多个元素时,value()返回值为列表
-            mouse_events = [].append(app_data.value('Mouse/mouse_list')) if type(app_data.value('Mouse/mouse_list')) is str else app_data.value('Mouse/mouse_list')
+            mouse_events = [app_data.value('Mouse/mouse_list')] if type(
+                app_data.value('Mouse/mouse_list')) is str else app_data.value('Mouse/mouse_list')
             for mouse_event in mouse_events:
                 mouse_event_item = QListWidgetItem()
                 mouse_event_item.setText(mouse_event)
                 mouse_event_item.setData(Qt.UserRole, mouse_event)
                 self.ui.mouse_event_list.addItem(mouse_event_item)
+
+        if app_data.value('Keyboard/keyboard_list'):
+            # 当配置文件中只存入了一个元素(event)时，value()返回值为str,当存入了多个元素时,value()返回值为列表
+            keyboard_events = [app_data.value('Keyboard/keyboard_list')] if type(
+                app_data.value('Keyboard/keyboard_list')) is str else app_data.value('Keyboard/keyboard_list')
+            for keyboard_event in keyboard_events:
+                keyboard_event_item = QListWidgetItem()
+                keyboard_event_item.setText(keyboard_event)
+                keyboard_event_item.setData(Qt.UserRole, keyboard_event)
+                self.ui.keyboard_event_list.addItem(keyboard_event_item)
 
         self.ui.catch_window_hotkey.setKeySequence(QKeySequence.fromString(app_data.value('Common/capture_hotkey')))
 
@@ -125,8 +168,17 @@ class AppLogic:
         self.ui.catch_window_hotkey.editingFinished.connect(self.set_handle_capture_hotkey)
         # 改动 捕获窗口句柄 热键 槽函数连接
         self.ui.add_mel_button.clicked.connect(self.mouse_event_dialog)
+        # 添加鼠标事件按钮
         self.ui.remove_mel_button.clicked.connect(self.remove_mouse_event)
+        # 删除鼠标事件按钮
         self.ui.clear_mel_button.clicked.connect(self.clear_mouse_event)
+        # 清空鼠标事件列表按钮
+        self.ui.add_kel_btn.clicked.connect(self.keyboard_event_dialog)
+        # 添加键盘事件按钮
+        self.ui.remove_kel_btn.clicked.connect(self.remove_keyboard_event)
+        # 删除键盘事件按钮
+        self.ui.clear_kel_btn.clicked.connect(self.clear_keyboard_event)
+        # 清空键盘事件列表按钮
 
     # ------------窗口句柄捕获函数-start------------#
     def handle_capture(self):
@@ -195,7 +247,7 @@ class AppLogic:
         将选中的鼠标事件从列表中删除
         :return:
         """
-        item = self.ui.mouse_event_list.takeItem(self.ui.mouse_event_list.currentRow())
+        self.ui.mouse_event_list.takeItem(self.ui.mouse_event_list.currentRow())
 
     def clear_mouse_event(self):
         """
@@ -255,9 +307,9 @@ class AppLogic:
         self.mouse_workers = build_worker_pool(self.mouse_queue, len(mouse_events))
         for mouse_event_str in mouse_events:
             mouse_event = mouse_event_data.fromString(mouse_event_str)
-            print(mouse_event)
+            # print(mouse_event)
             self.mouse_queue.put(MouseEvent(mouse_event.button, mouse_event.is_click,
-                                 self.handle, self.mouse_pos, mouse_event.break_time))
+                                            self.handle, self.mouse_pos, mouse_event.break_time))
 
     def mouse_stop(self):
         """
@@ -284,14 +336,129 @@ class AppLogic:
 
     # ------------鼠标操作函数-end------------#
     # ------------键盘操作函数-start------------#
+    def keyboard_event_dialog(self):
+        """
+        在"键盘操作栏"中的"添加"按钮按下时触发
+        弹出对话框
+        添加键盘事件
+        :return:
+        """
+
+        def add_keyboard_event():
+            """
+            添加键盘事件
+            :return:
+            """
+            event: keyboard_event_data = keyboard_event_data(
+                key=dialog.shortcut_key_edit.text(),
+                is_tap=dialog.is_tap_btn.isChecked(),
+                break_time=dialog.break_time_box.value()
+            )
+
+            # 检查keyboard_event_list中是否已存在该选项
+            if self.ui.keyboard_event_list.findItems(event.toString(), Qt.MatchExactly):
+                return
+
+            keyboard_event = QListWidgetItem()
+            keyboard_event.setText(event.toString())
+            keyboard_event.setData(Qt.UserRole, event.toString())
+            self.ui.keyboard_event_list.addItem(keyboard_event)
+
+        dialog_window = QDialog()
+        dialog = keyboard_event_dialog_ui.Ui_Dialog()
+        dialog.setupUi(dialog_window)
+        dialog.buttonBox.accepted.connect(add_keyboard_event)
+        dialog_window.show()
+        dialog_window.exec()
+
+    def remove_keyboard_event(self):
+        """
+        将选中的键盘事件从列表中删除
+        :return:
+        """
+        self.ui.keyboard_event_list.takeItem(self.ui.keyboard_event_list.currentRow())
+
+    def clear_keyboard_event(self):
+        """
+        清空键盘事件列表
+        :return:
+        """
+        self.ui.keyboard_event_list.clear()
+
+    def set_keyboard_start_hotkey(self):
+        """
+        设置/更改 键盘事件 开始 快捷键
+        :return:
+        """
+        keyboard_start_hotkey = QKeySequence.listToString(self.ui.keyboard_start_hotkey.keySequence()).lower()
+        # 现将默认设置中注册的热键删除
+        keyboard.remove_hotkey(self.app_data.value("Keyboard/start_hotkey"))
+        # 再添加新设置的热键
+        keyboard.add_hotkey(keyboard_start_hotkey, self.keyboard_start)
+        self.app_data.setValue("Keyboard/start_hotkey", keyboard_start_hotkey)
+        self.app_data.sync()
+
+    def set_keyboard_stop_hotkey(self):
+        """
+        设置/更改 鼠标事件 停止 快捷键
+        :return:
+        """
+        keyboard_stop_hotkey = QKeySequence.listToString(self.ui.keyboard_stop_hotkey.keySequence()).lower()
+        # 先将默认设置中的热键删除
+        keyboard.remove_hotkey(self.app_data.value("Keyboard/stop_hotkey"))
+        # 再添加新设置的热键
+        keyboard.add_hotkey(keyboard_stop_hotkey, self.mouse_stop)
+        self.app_data.setValue("Keyboard/stop_hotkey", keyboard_stop_hotkey)
+        self.app_data.sync()
+
     def keyboard_start(self):
-        pass
+        """
+        键盘操作开始函数
+        :return:
+        """
+
+        def build_worker_pool(queue, size):
+            """
+            创建工作线程，用于多线程并发
+            :param queue: 任务队列
+            :param size: 队列大小(并发数量)
+            :return:
+            """
+            _workers = []
+            for _ in range(size):
+                _worker = KeyboardConsumer(queue)
+                _worker.start()
+                _workers.append(_worker)
+            return _workers
+
+        keyboard_events = self.sync_keyboard_event_list()
+        self.keyboard_queue = Queue()
+        self.keyboard_workers = build_worker_pool(self.keyboard_queue, len(keyboard_events))
+        for keyboard_event_str in keyboard_events:
+            keyboard_event = keyboard_event_data.fromString(keyboard_event_str)
+            self.keyboard_queue.put(KeyboardEvent(keyboard_event.key, keyboard_event.is_tap,
+                                                  self.handle, keyboard_event.break_time))
 
     def keyboard_stop(self):
-        pass
+        """
+        键盘操作停止函数
+        :return:
+        """
+        for _ in self.keyboard_workers:
+            self.keyboard_queue.put('exit')
+        for worker in self.keyboard_workers:
+            worker.join()
+
+    def sync_keyboard_event_list(self):
+        """
+        将键盘事件列表中的所有事件写入到配置文件中
+        :return:
+        """
+        keyboard_events = []
+        for i in range(self.ui.keyboard_event_list.count()):
+            keyboard_event = self.ui.keyboard_event_list.item(i).data(Qt.UserRole)
+            keyboard_events.append(keyboard_event)
+        self.app_data.setValue('Keyboard/keyboard_list', keyboard_events)
+        self.app_data.sync()
+        return keyboard_events
     # ------------键盘操作函数-end------------#
-
-
-if __name__ == '__main__':
-    app = AppLogic()
-    app.main()

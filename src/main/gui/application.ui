@@ -29,6 +29,9 @@
       <property name="sizeConstraint">
        <enum>QLayout::SetFixedSize</enum>
       </property>
+      <property name="bottomMargin">
+       <number>10</number>
+      </property>
       <item>
        <spacer name="horizontalSpacer">
         <property name="orientation">
@@ -144,16 +147,16 @@
          <enum>QLayout::SetDefaultConstraint</enum>
         </property>
         <property name="leftMargin">
-         <number>10</number>
+         <number>20</number>
         </property>
         <property name="topMargin">
          <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>10</number>
+         <number>20</number>
         </property>
         <property name="bottomMargin">
-         <number>10</number>
+         <number>20</number>
         </property>
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout">
@@ -168,6 +171,9 @@
           </property>
           <item>
            <widget class="QPushButton" name="add_mel_button">
+            <property name="toolTip">
+             <string>添加鼠标事件</string>
+            </property>
             <property name="text">
              <string>添加</string>
             </property>
@@ -175,6 +181,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="remove_mel_button">
+            <property name="toolTip">
+             <string>删除鼠标事件</string>
+            </property>
             <property name="text">
              <string>删除</string>
             </property>
@@ -182,6 +191,9 @@
           </item>
           <item>
            <widget class="QPushButton" name="clear_mel_button">
+            <property name="toolTip">
+             <string>清空鼠标事件列表</string>
+            </property>
             <property name="text">
              <string>清空</string>
             </property>
@@ -190,7 +202,14 @@
          </layout>
         </item>
         <item>
-         <widget class="QListWidget" name="mouse_event_list"/>
+         <widget class="QListWidget" name="mouse_event_list">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="verticalSpacer">
@@ -349,93 +368,85 @@
       <item>
        <layout class="QVBoxLayout" name="verticalLayout_5">
         <property name="spacing">
-         <number>20</number>
+         <number>2</number>
         </property>
         <property name="leftMargin">
-         <number>10</number>
+         <number>20</number>
         </property>
         <property name="topMargin">
-         <number>10</number>
+         <number>0</number>
         </property>
         <property name="rightMargin">
-         <number>10</number>
+         <number>20</number>
         </property>
         <property name="bottomMargin">
-         <number>10</number>
+         <number>20</number>
         </property>
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <property name="spacing">
+           <number>2</number>
+          </property>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_4">
-            <item>
-             <widget class="QRadioButton" name="keyboard_click">
-              <property name="text">
-               <string>连按</string>
-              </property>
-              <attribute name="buttonGroup">
-               <string notr="true">keyboardGroup</string>
-              </attribute>
-             </widget>
-            </item>
-            <item>
-             <widget class="QDoubleSpinBox" name="keyboard_break_time">
-              <property name="toolTip">
-               <string>间隔时间</string>
-              </property>
-              <property name="wrapping">
-               <bool>false</bool>
-              </property>
-              <property name="buttonSymbols">
-               <enum>QAbstractSpinBox::NoButtons</enum>
-              </property>
-              <property name="prefix">
-               <string/>
-              </property>
-              <property name="suffix">
-               <string>秒</string>
-              </property>
-              <property name="minimum">
-               <double>0.100000000000000</double>
-              </property>
-             </widget>
-            </item>
-           </layout>
+           <widget class="QPushButton" name="add_kel_btn">
+            <property name="toolTip">
+             <string>添加键盘事件</string>
+            </property>
+            <property name="whatsThis">
+             <string/>
+            </property>
+            <property name="text">
+             <string>添加</string>
+            </property>
+           </widget>
           </item>
           <item>
-           <widget class="QRadioButton" name="keyboard_press">
+           <widget class="QPushButton" name="remove_kel_btn">
+            <property name="toolTip">
+             <string>删除键盘事件</string>
+            </property>
             <property name="text">
-             <string>长按</string>
+             <string>删除</string>
             </property>
-            <property name="checked">
-             <bool>true</bool>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="clear_kel_btn">
+            <property name="toolTip">
+             <string>清空键盘事件列表</string>
             </property>
-            <attribute name="buttonGroup">
-             <string notr="true">keyboardGroup</string>
-            </attribute>
+            <property name="text">
+             <string>清空</string>
+            </property>
            </widget>
           </item>
          </layout>
         </item>
         <item>
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item>
-           <widget class="QLabel" name="key_label">
-            <property name="text">
-             <string>按键:</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QKeySequenceEdit" name="keyboard_key"/>
-          </item>
-          <item>
-           <widget class="QPushButton" name="specButton">
-            <property name="text">
-             <string>特殊按键选择</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
+         <widget class="QListWidget" name="keyboard_event_list">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="verticalSpacer_2">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeType">
+           <enum>QSizePolicy::Preferred</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
         </item>
         <item>
          <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -470,6 +481,19 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_7">
             <item>
+             <spacer name="horizontalSpacer_9">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+            <item>
              <widget class="QLabel" name="keyboard_start_label">
               <property name="text">
                <string>开始:</string>
@@ -479,10 +503,36 @@
             <item>
              <widget class="QKeySequenceEdit" name="keyboard_start_hotkey"/>
             </item>
+            <item>
+             <spacer name="horizontalSpacer_10">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
            </layout>
           </item>
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_8">
+            <item>
+             <spacer name="horizontalSpacer_11">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
             <item>
              <widget class="QLabel" name="keyboard_stop_label">
               <property name="text">
@@ -492,6 +542,19 @@
             </item>
             <item>
              <widget class="QKeySequenceEdit" name="keyboard_stop_hotkey"/>
+            </item>
+            <item>
+             <spacer name="horizontalSpacer_12">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>

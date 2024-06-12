@@ -54,8 +54,6 @@ class Ui_Dialog(object):
 
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
-        self.horizontalLayout = QHBoxLayout()
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.horizontalLayout_3 = QHBoxLayout()
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
         self.is_click_btn = QRadioButton(self.verticalLayoutWidget)
@@ -85,10 +83,7 @@ class Ui_Dialog(object):
         self.horizontalLayout_3.addLayout(self.horizontalLayout_4)
 
 
-        self.horizontalLayout.addLayout(self.horizontalLayout_3)
-
-
-        self.verticalLayout.addLayout(self.horizontalLayout)
+        self.verticalLayout.addLayout(self.horizontalLayout_3)
 
 
         self.retranslateUi(Dialog)

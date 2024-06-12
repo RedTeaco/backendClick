@@ -10,11 +10,10 @@
 
 from PySide6.QtCore import (QCoreApplication, QMetaObject, QRect,
                             Qt)
-from PySide6.QtWidgets import (QAbstractSpinBox, QButtonGroup, QDoubleSpinBox,
-                               QFrame, QHBoxLayout, QKeySequenceEdit, QLabel,
-                               QLayout, QListWidget, QPushButton,
-                               QRadioButton, QSizePolicy, QSpacerItem, QVBoxLayout,
-                               QWidget)
+from PySide6.QtWidgets import (QFrame, QHBoxLayout,
+                               QKeySequenceEdit, QLabel, QLayout, QListWidget,
+                               QPushButton, QSizePolicy, QSpacerItem,
+                               QVBoxLayout, QWidget)
 
 class Ui_Form(object):
     def setupUi(self, Form):
@@ -30,6 +29,7 @@ class Ui_Form(object):
         self.horizontalLayout_12 = QHBoxLayout()
         self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
         self.horizontalLayout_12.setSizeConstraint(QLayout.SetFixedSize)
+        self.horizontalLayout_12.setContentsMargins(-1, -1, -1, 10)
         self.horizontalSpacer = QSpacerItem(40, 1, QSizePolicy.Expanding, QSizePolicy.Minimum)
 
         self.horizontalLayout_12.addItem(self.horizontalSpacer)
@@ -101,7 +101,7 @@ class Ui_Form(object):
         self.verticalLayout_4.setSpacing(2)
         self.verticalLayout_4.setObjectName(u"verticalLayout_4")
         self.verticalLayout_4.setSizeConstraint(QLayout.SetDefaultConstraint)
-        self.verticalLayout_4.setContentsMargins(10, 0, 10, 10)
+        self.verticalLayout_4.setContentsMargins(20, 0, 20, 20)
         self.horizontalLayout = QHBoxLayout()
         self.horizontalLayout.setSpacing(2)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -126,6 +126,11 @@ class Ui_Form(object):
 
         self.mouse_event_list = QListWidget(self.verticalLayoutWidget)
         self.mouse_event_list.setObjectName(u"mouse_event_list")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Expanding)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.mouse_event_list.sizePolicy().hasHeightForWidth())
+        self.mouse_event_list.setSizePolicy(sizePolicy2)
 
         self.verticalLayout_4.addWidget(self.mouse_event_list)
 
@@ -212,61 +217,40 @@ class Ui_Form(object):
         self.horizontalLayout_9.addWidget(self.line)
 
         self.verticalLayout_5 = QVBoxLayout()
-        self.verticalLayout_5.setSpacing(20)
+        self.verticalLayout_5.setSpacing(2)
         self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.verticalLayout_5.setContentsMargins(10, 10, 10, 10)
-        self.verticalLayout_3 = QVBoxLayout()
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.horizontalLayout_4 = QHBoxLayout()
-        self.horizontalLayout_4.setObjectName(u"horizontalLayout_4")
-        self.keyboard_click = QRadioButton(self.verticalLayoutWidget)
-        self.keyboardGroup = QButtonGroup(Form)
-        self.keyboardGroup.setObjectName(u"keyboardGroup")
-        self.keyboardGroup.addButton(self.keyboard_click)
-        self.keyboard_click.setObjectName(u"keyboard_click")
-
-        self.horizontalLayout_4.addWidget(self.keyboard_click)
-
-        self.keyboard_break_time = QDoubleSpinBox(self.verticalLayoutWidget)
-        self.keyboard_break_time.setObjectName(u"keyboard_break_time")
-        self.keyboard_break_time.setWrapping(False)
-        self.keyboard_break_time.setButtonSymbols(QAbstractSpinBox.NoButtons)
-        self.keyboard_break_time.setMinimum(0.100000000000000)
-
-        self.horizontalLayout_4.addWidget(self.keyboard_break_time)
-
-
-        self.verticalLayout_3.addLayout(self.horizontalLayout_4)
-
-        self.keyboard_press = QRadioButton(self.verticalLayoutWidget)
-        self.keyboardGroup.addButton(self.keyboard_press)
-        self.keyboard_press.setObjectName(u"keyboard_press")
-        self.keyboard_press.setChecked(True)
-
-        self.verticalLayout_3.addWidget(self.keyboard_press)
-
-
-        self.verticalLayout_5.addLayout(self.verticalLayout_3)
-
+        self.verticalLayout_5.setContentsMargins(20, 0, 20, 20)
         self.horizontalLayout_6 = QHBoxLayout()
+        self.horizontalLayout_6.setSpacing(2)
         self.horizontalLayout_6.setObjectName(u"horizontalLayout_6")
-        self.key_label = QLabel(self.verticalLayoutWidget)
-        self.key_label.setObjectName(u"key_label")
+        self.add_kel_btn = QPushButton(self.verticalLayoutWidget)
+        self.add_kel_btn.setObjectName(u"add_kel_btn")
 
-        self.horizontalLayout_6.addWidget(self.key_label)
+        self.horizontalLayout_6.addWidget(self.add_kel_btn)
 
-        self.keyboard_key = QKeySequenceEdit(self.verticalLayoutWidget)
-        self.keyboard_key.setObjectName(u"keyboard_key")
+        self.remove_kel_btn = QPushButton(self.verticalLayoutWidget)
+        self.remove_kel_btn.setObjectName(u"remove_kel_btn")
 
-        self.horizontalLayout_6.addWidget(self.keyboard_key)
+        self.horizontalLayout_6.addWidget(self.remove_kel_btn)
 
-        self.specButton = QPushButton(self.verticalLayoutWidget)
-        self.specButton.setObjectName(u"specButton")
+        self.clear_kel_btn = QPushButton(self.verticalLayoutWidget)
+        self.clear_kel_btn.setObjectName(u"clear_kel_btn")
 
-        self.horizontalLayout_6.addWidget(self.specButton)
+        self.horizontalLayout_6.addWidget(self.clear_kel_btn)
 
 
         self.verticalLayout_5.addLayout(self.horizontalLayout_6)
+
+        self.keyboard_event_list = QListWidget(self.verticalLayoutWidget)
+        self.keyboard_event_list.setObjectName(u"keyboard_event_list")
+        sizePolicy2.setHeightForWidth(self.keyboard_event_list.sizePolicy().hasHeightForWidth())
+        self.keyboard_event_list.setSizePolicy(sizePolicy2)
+
+        self.verticalLayout_5.addWidget(self.keyboard_event_list)
+
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Preferred)
+
+        self.verticalLayout_5.addItem(self.verticalSpacer_2)
 
         self.verticalLayout_6 = QVBoxLayout()
         self.verticalLayout_6.setObjectName(u"verticalLayout_6")
@@ -284,6 +268,10 @@ class Ui_Form(object):
 
         self.horizontalLayout_7 = QHBoxLayout()
         self.horizontalLayout_7.setObjectName(u"horizontalLayout_7")
+        self.horizontalSpacer_9 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_7.addItem(self.horizontalSpacer_9)
+
         self.keyboard_start_label = QLabel(self.verticalLayoutWidget)
         self.keyboard_start_label.setObjectName(u"keyboard_start_label")
 
@@ -294,11 +282,19 @@ class Ui_Form(object):
 
         self.horizontalLayout_7.addWidget(self.keyboard_start_hotkey)
 
+        self.horizontalSpacer_10 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_7.addItem(self.horizontalSpacer_10)
+
 
         self.verticalLayout_6.addLayout(self.horizontalLayout_7)
 
         self.horizontalLayout_8 = QHBoxLayout()
         self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalSpacer_11 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_11)
+
         self.keyboard_stop_label = QLabel(self.verticalLayoutWidget)
         self.keyboard_stop_label.setObjectName(u"keyboard_stop_label")
 
@@ -308,6 +304,10 @@ class Ui_Form(object):
         self.keyboard_stop_hotkey.setObjectName(u"keyboard_stop_hotkey")
 
         self.horizontalLayout_8.addWidget(self.keyboard_stop_hotkey)
+
+        self.horizontalSpacer_12 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_12)
 
 
         self.verticalLayout_6.addLayout(self.horizontalLayout_8)
@@ -332,21 +332,36 @@ class Ui_Form(object):
         self.catch_window_label.setText(QCoreApplication.translate("Form", u"\u7a97\u53e3\u6355\u83b7", None))
         self.window_name_label.setText(QCoreApplication.translate("Form", u"\u7a97\u53e3\u540d\uff1a", None))
         self.window_name.setText("")
+#if QT_CONFIG(tooltip)
+        self.add_mel_button.setToolTip(QCoreApplication.translate("Form", u"\u6dfb\u52a0\u9f20\u6807\u4e8b\u4ef6", None))
+#endif // QT_CONFIG(tooltip)
         self.add_mel_button.setText(QCoreApplication.translate("Form", u"\u6dfb\u52a0", None))
+#if QT_CONFIG(tooltip)
+        self.remove_mel_button.setToolTip(QCoreApplication.translate("Form", u"\u5220\u9664\u9f20\u6807\u4e8b\u4ef6", None))
+#endif // QT_CONFIG(tooltip)
         self.remove_mel_button.setText(QCoreApplication.translate("Form", u"\u5220\u9664", None))
+#if QT_CONFIG(tooltip)
+        self.clear_mel_button.setToolTip(QCoreApplication.translate("Form", u"\u6e05\u7a7a\u9f20\u6807\u4e8b\u4ef6\u5217\u8868", None))
+#endif // QT_CONFIG(tooltip)
         self.clear_mel_button.setText(QCoreApplication.translate("Form", u"\u6e05\u7a7a", None))
         self.mouse_hotkey_label.setText(QCoreApplication.translate("Form", u"\u9f20\u6807\u64cd\u4f5c\u5feb\u6377\u952e", None))
         self.mouse_start_label.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb:", None))
         self.mouse_stop_label.setText(QCoreApplication.translate("Form", u"\u7ed3\u675f:", None))
-        self.keyboard_click.setText(QCoreApplication.translate("Form", u"\u8fde\u6309", None))
 #if QT_CONFIG(tooltip)
-        self.keyboard_break_time.setToolTip(QCoreApplication.translate("Form", u"\u95f4\u9694\u65f6\u95f4", None))
+        self.add_kel_btn.setToolTip(QCoreApplication.translate("Form", u"\u6dfb\u52a0\u952e\u76d8\u4e8b\u4ef6", None))
 #endif // QT_CONFIG(tooltip)
-        self.keyboard_break_time.setPrefix("")
-        self.keyboard_break_time.setSuffix(QCoreApplication.translate("Form", u"\u79d2", None))
-        self.keyboard_press.setText(QCoreApplication.translate("Form", u"\u957f\u6309", None))
-        self.key_label.setText(QCoreApplication.translate("Form", u"\u6309\u952e:", None))
-        self.specButton.setText(QCoreApplication.translate("Form", u"\u7279\u6b8a\u6309\u952e\u9009\u62e9", None))
+#if QT_CONFIG(whatsthis)
+        self.add_kel_btn.setWhatsThis("")
+#endif // QT_CONFIG(whatsthis)
+        self.add_kel_btn.setText(QCoreApplication.translate("Form", u"\u6dfb\u52a0", None))
+#if QT_CONFIG(tooltip)
+        self.remove_kel_btn.setToolTip(QCoreApplication.translate("Form", u"\u5220\u9664\u952e\u76d8\u4e8b\u4ef6", None))
+#endif // QT_CONFIG(tooltip)
+        self.remove_kel_btn.setText(QCoreApplication.translate("Form", u"\u5220\u9664", None))
+#if QT_CONFIG(tooltip)
+        self.clear_kel_btn.setToolTip(QCoreApplication.translate("Form", u"\u6e05\u7a7a\u952e\u76d8\u4e8b\u4ef6\u5217\u8868", None))
+#endif // QT_CONFIG(tooltip)
+        self.clear_kel_btn.setText(QCoreApplication.translate("Form", u"\u6e05\u7a7a", None))
         self.keyboard_hotkey_label.setText(QCoreApplication.translate("Form", u"\u952e\u76d8\u64cd\u4f5c\u5feb\u6377\u952e", None))
         self.keyboard_start_label.setText(QCoreApplication.translate("Form", u"\u5f00\u59cb:", None))
         self.keyboard_stop_label.setText(QCoreApplication.translate("Form", u"\u7ed3\u675f:", None))

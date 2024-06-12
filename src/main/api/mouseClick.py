@@ -36,7 +36,7 @@ def mouse_down(handle: HWND, x: int = 960, y: int = 540, button=MOUSE_LEFT) -> N
     :param button: 左键|中键|右键
     :return:
     """
-    print("按下%s" % button)
+    # print("按下%s" % button)
     wparam = 0
     lparam = y << 16 | x
     PostMessageW(handle, mouse_dict_down[button], wparam, lparam)
@@ -55,7 +55,7 @@ def mouse_up(handle: HWND, x: int = 960, y: int = 540, button=MOUSE_LEFT):
     :param button: 左键|中键|右键
     :return:
     """
-    print("松开%s" % button)
+    # print("松开%s" % button)
     wparam = 0
     lparam = y << 16 | x
     PostMessageW(handle, mouse_dict_up[button], wparam, lparam)

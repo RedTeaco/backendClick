@@ -85,7 +85,7 @@ def get_virtual_keycode(key: str):
         # https://docs.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-vkkeyscana
         return VkKeyScanA(ord(key)) & 0xff
     else:
-        return VkCode[key]
+        return VkCode[key.lower()]
 
 
 def key_down(handle: HWND, key: str):
@@ -95,7 +95,7 @@ def key_down(handle: HWND, key: str):
         handle (HWND): 窗口句柄
         key (str): 按键名
     """
-    print("按下按键%s" % key)
+    # print("按下按键%s" % key)
     vk_code = get_virtual_keycode(key)
     scan_code = MapVirtualKeyW(vk_code, 0)
     # https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-keydown
@@ -111,7 +111,7 @@ def key_up(handle: HWND, key: str):
         handle (HWND): 窗口句柄
         key (str): 按键名
     """
-    print("松开按键%s" % key)
+    # print("松开按键%s" % key)
     vk_code = get_virtual_keycode(key)
     scan_code = MapVirtualKeyW(vk_code, 0)
     # https://docs.microsoft.com/en-us/windows/win32/inputdev/wm-keyup

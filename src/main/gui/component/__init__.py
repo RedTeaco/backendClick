@@ -1,0 +1,1 @@
+from gui.component.shortcut_key_edit import ShortcutKeyEdit
