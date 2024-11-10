@@ -1,0 +1,6 @@
+<RCC>
+  <qresource prefix="btn_img">
+    <file>svg/lock.svg</file>
+    <file>svg/unlock.svg</file>
+  </qresource>
+</RCC>

@@ -167,6 +167,8 @@ class AppLogic:
         """
         self.ui.catch_window_hotkey.editingFinished.connect(self.set_handle_capture_hotkey)
         # 改动 捕获窗口句柄 热键 槽函数连接
+        self.ui.lockWindow.clicked.connect(self.lock_btn_click)
+        # 锁定窗口按钮
 
         self.ui.mouse_start_hotkey.editingFinished.connect(self.set_mouse_start_hotkey)
         # 改动 鼠标事件开始 热键 槽函数连接
@@ -209,6 +211,12 @@ class AppLogic:
         keyboard.add_hotkey(key, self.handle_capture)
         self.app_data.setValue("Common/capture_hotkey", key)
         self.app_data.sync()
+
+    def lock_btn_click(self):
+        if self.ui.lockWindow.isChecked():
+            keyboard.remove_hotkey(self.app_data.value("Common/capture_hotkey"))
+        else:
+            keyboard.add_hotkey(self.app_data.value("Common/capture_hotkey"),self.handle_capture)
 
     # ------------窗口句柄捕获函数-end------------#
 

@@ -78,6 +78,36 @@
             </property>
            </widget>
           </item>
+          <item>
+           <widget class="QPushButton" name="lockWindow">
+            <property name="styleSheet">
+             <string notr="true"/>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../../resource/buttons.qrc">
+              <normaloff>:/btn_img/svg/unlock.svg</normaloff>
+              <normalon>:/btn_img/svg/lock.svg</normalon>:/btn_img/svg/unlock.svg</iconset>
+            </property>
+            <property name="iconSize">
+             <size>
+              <width>16</width>
+              <height>16</height>
+             </size>
+            </property>
+            <property name="checkable">
+             <bool>true</bool>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+            <property name="flat">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
          </layout>
         </item>
         <item>
@@ -567,9 +597,8 @@
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resource/buttons.qrc"/>
+ </resources>
  <connections/>
- <buttongroups>
-  <buttongroup name="keyboardGroup"/>
- </buttongroups>
 </ui>
