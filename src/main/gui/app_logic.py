@@ -304,6 +304,10 @@ class AppLogic:
         鼠标操作开始函数
         :return:
         """
+        # 判断是否已在工作中
+        if self.mouse_lock:
+            return
+
 
         def build_worker_pool(queue, size):
             """
@@ -327,6 +331,7 @@ class AppLogic:
             qDebug(f"鼠标事件:{mouse_event}")
             self.mouse_queue.put(MouseEvent(mouse_event.button, mouse_event.is_click,
                                             self.handle, self.mouse_pos, mouse_event.break_time))
+        self.mouse_lock = True
 
     def mouse_stop(self):
         """
@@ -337,6 +342,7 @@ class AppLogic:
             self.mouse_queue.put('exit')
         for worker in self.mouse_workers:
             worker.join()
+        self.mouse_lock = False
 
     def sync_mouse_event_list(self):
         """
@@ -433,6 +439,9 @@ class AppLogic:
         键盘操作开始函数
         :return:
         """
+        # 判断是否已在工作中
+        if self.keyboard_lock:
+            return
 
         def build_worker_pool(queue, size):
             """
@@ -466,6 +475,7 @@ class AppLogic:
             self.keyboard_queue.put('exit')
         for worker in self.keyboard_workers:
             worker.join()
+        self.keyboard_lock = True
 
     def sync_keyboard_event_list(self):
         """

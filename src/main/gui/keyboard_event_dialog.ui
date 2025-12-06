@@ -32,10 +32,10 @@
     </sizepolicy>
    </property>
    <property name="orientation">
-    <enum>Qt::Horizontal</enum>
+    <enum>Qt::Orientation::Horizontal</enum>
    </property>
    <property name="standardButtons">
-    <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
    </property>
    <property name="centerButtons">
     <bool>true</bool>
@@ -98,13 +98,16 @@
            <bool>true</bool>
           </property>
           <property name="buttonSymbols">
-           <enum>QAbstractSpinBox::NoButtons</enum>
+           <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
           </property>
           <property name="suffix">
            <string>秒</string>
           </property>
           <property name="minimum">
            <double>0.010000000000000</double>
+          </property>
+          <property name="maximum">
+           <double>3600.000000000000000</double>
           </property>
          </widget>
         </item>

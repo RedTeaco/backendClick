@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'keyboard_event_dialog.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.7.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -25,13 +25,13 @@ class Ui_Dialog(object):
         self.buttonBox = QDialogButtonBox(Dialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setGeometry(QRect(40, 150, 211, 23))
-        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy = QSizePolicy(QSizePolicy.Policy.Fixed, QSizePolicy.Policy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(self.buttonBox.sizePolicy().hasHeightForWidth())
         self.buttonBox.setSizePolicy(sizePolicy)
-        self.buttonBox.setOrientation(Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel|QDialogButtonBox.Ok)
+        self.buttonBox.setOrientation(Qt.Orientation.Horizontal)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setCenterButtons(True)
         self.verticalLayoutWidget = QWidget(Dialog)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
@@ -73,8 +73,9 @@ class Ui_Dialog(object):
         self.break_time_box.setEnabled(False)
         self.break_time_box.setMinimumSize(QSize(75, 0))
         self.break_time_box.setMouseTracking(True)
-        self.break_time_box.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.break_time_box.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
         self.break_time_box.setMinimum(0.010000000000000)
+        self.break_time_box.setMaximum(3600.000000000000000)
 
         self.horizontalLayout.addWidget(self.break_time_box)
 

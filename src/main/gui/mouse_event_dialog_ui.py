@@ -3,7 +3,7 @@
 ################################################################################
 ## Form generated from reading UI file 'mouse_event_dialog.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.7.2
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,18 +15,17 @@ from PySide6.QtWidgets import (QAbstractSpinBox, QComboBox,
                                QLabel, QRadioButton, QVBoxLayout,
                                QWidget)
 
-
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         if not Dialog.objectName():
             Dialog.setObjectName(u"Dialog")
-        Dialog.setWindowModality(Qt.ApplicationModal)
+        Dialog.setWindowModality(Qt.WindowModality.ApplicationModal)
         Dialog.resize(300, 200)
         Dialog.setModal(True)
         self.buttonBox = QDialogButtonBox(Dialog)
         self.buttonBox.setObjectName(u"buttonBox")
         self.buttonBox.setGeometry(QRect(40, 150, 211, 23))
-        self.buttonBox.setStandardButtons(QDialogButtonBox.Cancel | QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
         self.buttonBox.setCenterButtons(True)
         self.verticalLayoutWidget = QWidget(Dialog)
         self.verticalLayoutWidget.setObjectName(u"verticalLayoutWidget")
@@ -52,6 +51,7 @@ class Ui_Dialog(object):
 
         self.horizontalLayout_2.addWidget(self.mouse_btn_box)
 
+
         self.verticalLayout.addLayout(self.horizontalLayout_2)
 
         self.horizontalLayout_3 = QHBoxLayout()
@@ -73,23 +73,27 @@ class Ui_Dialog(object):
         self.break_time_box.setEnabled(False)
         self.break_time_box.setMinimumSize(QSize(75, 0))
         self.break_time_box.setMouseTracking(True)
-        self.break_time_box.setContextMenuPolicy(Qt.DefaultContextMenu)
-        self.break_time_box.setButtonSymbols(QAbstractSpinBox.NoButtons)
+        self.break_time_box.setContextMenuPolicy(Qt.ContextMenuPolicy.DefaultContextMenu)
+        self.break_time_box.setButtonSymbols(QAbstractSpinBox.ButtonSymbols.NoButtons)
         self.break_time_box.setMinimum(0.010000000000000)
+        self.break_time_box.setMaximum(3600.000000000000000)
 
         self.horizontalLayout_4.addWidget(self.break_time_box)
 
+
         self.horizontalLayout_3.addLayout(self.horizontalLayout_4)
 
+
         self.verticalLayout.addLayout(self.horizontalLayout_3)
+
 
         self.retranslateUi(Dialog)
         self.is_click_btn.toggled.connect(self.break_time_box.setEnabled)
 
         self.mouse_btn_box.setCurrentIndex(0)
 
-        QMetaObject.connectSlotsByName(Dialog)
 
+        QMetaObject.connectSlotsByName(Dialog)
     # setupUi
 
     def retranslateUi(self, Dialog):
@@ -104,3 +108,4 @@ class Ui_Dialog(object):
         self.label_3.setText(QCoreApplication.translate("Dialog", u"\u95f4\u9694\u65f6\u95f4", None))
         self.break_time_box.setSuffix(QCoreApplication.translate("Dialog", u"\u79d2", None))
     # retranslateUi
+
